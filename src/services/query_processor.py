@@ -159,12 +159,15 @@ class QueryProcessor(QueryProcessorInterface):
         Returns:
             bool: True if suspicious content is found
         """
-        # Basic checks for SQL injection patterns
+        # More reasonable checks for actual malicious patterns
+        # Allow normal punctuation like apostrophes and quotes in search queries
         sql_patterns = [
-            r'\b(DROP|DELETE|INSERT|UPDATE|ALTER|CREATE)\b',
-            r'[\'";]',
-            r'--',
-            r'/\*.*\*/',
+            r'\b(DROP|DELETE|INSERT|UPDATE|ALTER|CREATE)\s+(TABLE|DATABASE|INDEX)',  # More specific SQL commands
+            r';\s*(DROP|DELETE|INSERT|UPDATE|ALTER|CREATE)',  # SQL injection attempts
+            r'--\s*[^\s]',  # SQL comments (but allow normal dashes)
+            r'/\*.*\*/',  # SQL block comments
+            r'\bUNION\s+SELECT\b',  # SQL injection pattern
+            r'\bOR\s+1\s*=\s*1\b',  # SQL injection pattern
         ]
         
         query_upper = query.upper()
@@ -173,8 +176,12 @@ class QueryProcessor(QueryProcessorInterface):
             if re.search(pattern, query_upper):
                 return True
         
-        # Check for excessively long repeated characters
-        if re.search(r'(.)\1{50,}', query):
+        # Check for excessively long repeated characters (potential DoS)
+        if re.search(r'(.)\1{100,}', query):  # Increased threshold
+            return True
+        
+        # Check for extremely long queries (potential DoS)
+        if len(query) > 10000:  # Very generous limit
             return True
         
         return False

@@ -1,0 +1,24 @@
+Physics Formulas and Concepts
+
+Motion:
+- Velocity: v = d/t (distance over time)
+- Acceleration: a = (v₂ - v₁)/t
+- Force: F = ma (mass times acceleration)
+- Momentum: p = mv (mass times velocity)
+
+Energy:
+- Kinetic energy: KE = ½mv²
+- Potential energy: PE = mgh
+- Work: W = Fd (force times distance)
+- Power: P = W/t (work over time)
+
+Electricity:
+- Ohm's law: V = IR (voltage equals current times resistance)
+- Power: P = VI (voltage times current)
+- Energy: E = Pt (power times time)
+
+Waves:
+- Wave speed: v = fλ (frequency times wavelength)
+- Period: T = 1/f (inverse of frequency)
+
+This document contains fundamental physics formulas.

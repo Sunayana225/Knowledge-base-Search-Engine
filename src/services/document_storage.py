@@ -48,7 +48,27 @@ class DocumentStorageService:
                 stored_chunks = self.chunk_repository.create_chunks(chunks_with_embeddings)
                 
                 # Store embeddings in vector database
+                print(f"🔄 Storing {len(stored_chunks)} chunks in vector storage...")
+                
+                # Get stats before storing
+                vector_stats_before = self.vector_storage.get_storage_stats()
+                print(f"📊 Vector storage before: {vector_stats_before['total_vectors']} vectors")
+                
                 self.vector_storage.store_embeddings(stored_chunks)
+                
+                # Verify embeddings were stored
+                vector_stats_after = self.vector_storage.get_storage_stats()
+                print(f"📊 Vector storage after: {vector_stats_after['total_vectors']} vectors")
+                
+                # Ensure the count increased
+                expected_count = vector_stats_before['total_vectors'] + len(stored_chunks)
+                if vector_stats_after['total_vectors'] != expected_count:
+                    raise VectorStorageError(
+                        f"Vector storage count mismatch! Expected {expected_count}, "
+                        f"got {vector_stats_after['total_vectors']}"
+                    )
+                
+                print(f"✅ Vector storage successfully updated: +{len(stored_chunks)} vectors")
                 
                 # Update document status to completed
                 self.doc_repository.update_document_status(
@@ -98,13 +118,17 @@ class DocumentStorageService:
         
         if chunks_needing_embeddings:
             # Generate embeddings for chunks that don't have them
+            print(f"🔄 Generating embeddings for {len(chunks_needing_embeddings)} chunks...")
             texts = [chunk.content for chunk in chunks_needing_embeddings]
             embeddings = self.embedding_service.generate_embeddings(texts)
+            print(f"✅ Generated {len(embeddings)} embeddings")
             
             # Add embeddings to chunks
             for chunk, embedding in zip(chunks_needing_embeddings, embeddings):
                 chunk.embedding = embedding
                 chunks_with_embeddings.append(chunk)
+        else:
+            print(f"✅ All {len(chunks_with_embeddings)} chunks already have embeddings")
         
         return chunks_with_embeddings
     

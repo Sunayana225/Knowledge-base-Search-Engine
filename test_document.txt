@@ -1,0 +1,26 @@
+Mathematics Formulas
+
+Basic Arithmetic:
+- Addition: a + b = sum
+- Subtraction: a - b = difference  
+- Multiplication: a × b = product
+- Division: a ÷ b = quotient
+
+Algebra:
+- Linear equation: y = mx + c
+- Quadratic formula: x = (-b ± √(b²-4ac)) / 2a
+- Slope formula: m = (y₂-y₁)/(x₂-x₁)
+
+Geometry:
+- Area of rectangle: A = length × width
+- Area of circle: A = πr²
+- Circumference of circle: C = 2πr
+- Pythagorean theorem: a² + b² = c²
+
+Statistics:
+- Mean (average): μ = (x₁ + x₂ + ... + xₙ) / n
+- Median: middle value when data is ordered
+- Mode: most frequently occurring value
+- Standard deviation: σ = √(Σ(x-μ)²/n)
+
+This document contains various mathematical formulas and concepts.

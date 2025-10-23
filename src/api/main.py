@@ -45,8 +45,21 @@ query_processor = QueryProcessor()
 async def startup_event():
     """Initialize database tables on startup."""
     try:
+        import os
+        print(f"API Server working directory: {os.getcwd()}")
+        print(f"Database URL from config: {config.database.url}")
+        
         db_manager.create_tables()
         print("Database tables initialized successfully")
+        
+        # Test document count
+        from src.database.repository import DocumentRepository
+        doc_repo = DocumentRepository()
+        docs = doc_repo.list_documents(limit=10)
+        print(f"Found {len(docs)} documents in database")
+        for doc in docs:
+            print(f"  - {doc.filename} (ID: {doc.id})")
+            
     except Exception as e:
         print(f"Warning: Failed to create database tables: {e}")
         # Continue startup even if database initialization fails
@@ -89,14 +102,27 @@ async def upload_document(file: UploadFile = File(...)):
         DocumentResponse: Document metadata and processing status
     """
     try:
+        print(f"📄 Starting upload for: {file.filename}")
+        
         # Read file content
         file_content = await file.read()
         file_stream = io.BytesIO(file_content)
+        print(f"📄 File read successfully: {len(file_content)} bytes")
         
         # Process document
+        print(f"📄 Processing document...")
         processed_doc = document_ingestion.process_and_store_document(
             file_stream, file.filename
         )
+        print(f"📄 Document processed successfully: {processed_doc.metadata.id}")
+        print(f"📄 Chunks created: {len(processed_doc.chunks)}")
+        print(f"📄 Processing status: {processed_doc.metadata.processing_status}")
+        
+        # Verify embeddings were stored
+        from src.services.document_storage import DocumentStorageService
+        storage_service = DocumentStorageService()
+        vector_stats = storage_service.vector_storage.get_storage_stats()
+        print(f"📄 Vector storage after upload: {vector_stats['total_vectors']} vectors")
         
         return DocumentResponse(
             id=processed_doc.metadata.id,
@@ -109,8 +135,12 @@ async def upload_document(file: UploadFile = File(...)):
         )
         
     except (DocumentProcessingError, ValidationError) as e:
+        print(f"❌ Document processing error: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        print(f"❌ Unexpected error during upload: {str(e)}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Document upload failed: {str(e)}")
 
 
