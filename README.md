@@ -230,22 +230,6 @@ pytest --cov=src tests/
 |-------------|----------------|---------|
 | **Prompt example: "Using these documents, answer the user's question succinctly."** | ✅ Advanced prompt engineering with context injection | **COMPLETE** |
 
-### ✅ **Deliverables - READY**
-
-| Deliverable | Status | Location |
-|-------------|---------|----------|
-| **GitHub repo + README** | ✅ **COMPLETE** | This repository |
-| **Demo video** | 🎬 **READY TO RECORD** | Can be created |
-
-### ✅ **Evaluation Focus - EXCELLENCE**
-
-| Focus Area | Implementation Quality | Score |
-|------------|----------------------|-------|
-| **Retrieval accuracy** | ✅ Semantic search with relevance scoring | **EXCELLENT** |
-| **Synthesis quality** | ✅ Gemini AI with custom prompts & citations | **EXCELLENT** |
-| **Code structure** | ✅ Clean architecture, interfaces, separation of concerns | **EXCELLENT** |
-| **LLM integration** | ✅ Production-ready Gemini integration with error handling | **EXCELLENT** |
-
 ## 🎯 **Advanced Features**
 
 ### **RAG Pipeline**
@@ -288,40 +272,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Sentence Transformers** for embedding models
 - **FAISS** for efficient vector search
 - **FastAPI** for the excellent web framework
-
----
-
-## 🎬 **Demo Video Script**
-
-*Ready to record a comprehensive demo showing:*
-
-1. **System Overview** (30s)
-   - Architecture explanation
-   - Technology stack highlight
-
-2. **Document Upload Demo** (60s)
-   - Upload PDF and TXT files
-   - Show processing pipeline
-   - Display document management
-
-3. **Search & Query Demo** (90s)
-   - Natural language queries
-   - AI-generated answers
-   - Source citations and relevance
-   - Multiple query examples
-
-4. **Technical Deep Dive** (60s)
-   - API endpoints demonstration
-   - Code structure walkthrough
-   - Configuration options
-
-5. **Performance & Scalability** (30s)
-   - Response times
-   - Concurrent handling
-   - Production readiness
-
-**Total Duration: ~4.5 minutes**
-
----
 
 **🚀 This Knowledge-base Search Engine represents a complete, production-ready RAG implementation that exceeds all specified requirements while maintaining enterprise-grade code quality and architecture.**
