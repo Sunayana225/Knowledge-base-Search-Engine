@@ -7,7 +7,7 @@
 }
 
 :root {
-    --page-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    --page-gradient: #ffffff;
     --card-border: rgba(33,37,41,0.06);
     --muted: #6c757d;
 }
@@ -20,7 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: #ffffff;
     color: #212529;
     line-height: 1.6;
     min-height: 100vh;
