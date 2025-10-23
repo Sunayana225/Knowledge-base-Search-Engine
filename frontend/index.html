@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge-base Search Engine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <h1>Knowledge-base Search Engine</h1>
+            <p class="subtitle">Upload documents and search with AI-powered answers</p>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main">
+            <!-- Search Section (Primary) -->
+            <div class="search-section">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Ask a question about your documents..." class="search-input">
+                    <button id="searchButton" class="search-button">Search</button>
+                </div>
+                
+                <div class="search-results" id="searchResults" style="display: none;">
+                    <div class="answer-content" id="answerContent"></div>
+                    <div class="sources-list" id="sourcesList"></div>
+                </div>
+                
+                <div class="search-loading" id="searchLoading" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Searching documents...</p>
+                </div>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📄</div>
+                <p class="upload-text">Drag and drop files here or <span class="upload-link">browse</span></p>
+                <p class="upload-hint">Supports PDF and TXT files (max 50MB)</p>
+                <input type="file" id="fileInput" accept=".pdf,.txt" multiple hidden>
+            </div>
+            
+            <div class="upload-progress" id="uploadProgress" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">Uploading...</p>
+            </div>
+
+            <!-- Documents List -->
+            <div class="documents-list" id="documentsList">
+                <div class="loading" id="documentsLoading">Loading documents...</div>
+            </div>
+        </main>
+
+        <!-- Status Messages -->
+        <div class="status-message" id="statusMessage" style="display: none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
